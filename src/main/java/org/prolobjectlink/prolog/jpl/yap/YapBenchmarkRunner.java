@@ -145,6 +145,33 @@ public class YapBenchmarkRunner extends AbstractBenchmarkRunner implements Bench
 					provider.newStructure(d, "is",
 							provider.newStructure(provider.newStructure(p, "*", provider.newInteger(100)), "/", a)));
 
+			// employee relationship
+			engine.assertz("employee( mcardon, 1, 5 )");
+			engine.assertz("employee( treeman, 2, 3 )");
+			engine.assertz("employee( chapman, 1, 2 )");
+			engine.assertz("employee( claessen, 4, 1 )");
+			engine.assertz("employee( petersen, 5, 8 )");
+			engine.assertz("employee( cohn, 1, 7 )");
+			engine.assertz("employee( duffy, 1, 9 )");
+
+			// department relationship
+			engine.assertz("department( 1, board )");
+			engine.assertz("department( 2, human_resources )");
+			engine.assertz("department( 3, production )");
+			engine.assertz("department( 4, technical_services )");
+			engine.assertz("department( 5, administration )");
+
+			// salary relationship
+			engine.assertz("salary( 1, 1000 )");
+			engine.assertz("salary( 2, 1500 )");
+			engine.assertz("salary( 3, 2000 )");
+			engine.assertz("salary( 4, 2500 )");
+			engine.assertz("salary( 5, 3000 )");
+			engine.assertz("salary( 6, 3500 )");
+			engine.assertz("salary( 7, 4000 )");
+			engine.assertz("salary( 8, 4500 )");
+			engine.assertz("salary( 9, 5000 )");
+
 		}
 	}
 
@@ -154,6 +181,15 @@ public class YapBenchmarkRunner extends AbstractBenchmarkRunner implements Bench
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	public void benchQuery(ExecutionPlan plan) {
 		plan.engine.query("query").oneSolution();
+	}
+
+	@Benchmark
+	@Fork(value = 1, warmups = 0)
+	@BenchmarkMode(Mode.AverageTime)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+	public void benchQueryAll(ExecutionPlan plan) {
+		plan.engine.query("employee(Name,Dpto,Scale),department(Dpto,DepartmentName),salary(Scale,Money)")
+				.allSolutions();
 	}
 
 	public static void main(String[] args) throws RunnerException {
