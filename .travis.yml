@@ -1,0 +1,91 @@
+language: java
+dist: trusty
+sudo: false
+addons:
+  apt:
+    packages:
+      - build-essential
+      - pkg-config
+      - ncurses-dev
+      - libreadline-dev
+      - libedit-dev
+      - libgmp-dev
+      - libssl-dev
+      - unixodbc-dev
+      - zlib1g-dev
+      - libarchive-dev
+      - libossp-uuid-dev
+      - libxext-dev
+      - libice-dev
+      - libjpeg-dev
+      - libxinerama-dev
+      - libxft-dev
+      - libxpm-dev
+      - libxt-dev
+      - libdb-dev
+      - libpcre3-dev
+      - libyaml-dev
+      - openjdk-8-jdk
+      - junit
+      - ninja-build
+  homebrew:
+    packages:
+      - cmake
+      - ninja
+      - gmp
+      - libarchive
+      - readline
+      - ossp-uuid
+      - openssl
+      - libyaml
+      - unixodbc
+      - berkeley-db
+      - pcre
+      - jpeg
+
+before_install:
+  - wget https://archive.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip
+  - unzip -qq apache-maven-3.5.0-bin.zip
+  - export M2_HOME=$PWD/apache-maven-3.5.0
+  - export PATH=$M2_HOME/bin:$PATH
+  - echo "MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx1g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS'" > ~/.mavenrc
+  - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - echo $JAVA_HOME
+  - sudo touch /etc/ld.so.conf.d/java.conf
+  - echo $JAVA_HOME/jre/lib/amd64 | sudo tee -a /etc/ld.so.conf.d/java.conf
+  - echo $JAVA_HOME/jre/lib/amd64/server | sudo tee -a /etc/ld.so.conf.d/java.conf
+  - sudo ldconfig
+  - export PATH=$PATH:$JAVA_HOME/bin
+  - export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/tools.jar
+  - export CLASSPATH=$CLASSPATH:$JAVA_HOME/jre/lib/rt.jar
+  - wget https://www.swi-prolog.org/download/stable/src/pl-6.6.6.tar.gz
+  - tar -xzvf pl-6.6.6.tar.gz
+  - cd pl-6.6.6
+  - ./configure --with-world
+  - make
+  - sudo make install
+  - cd packages/jpl
+  - ./configure
+  - make
+  - export SWI_HOME=/home/travis/build/prolobjectlink/prolobjectlink-jpi-jpl-yap/pl-6.6.6
+  - export PATH=$PATH:$SWI_HOME/bin
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/travis/build/prolobjectlink/prolobjectlink-jpi-jpl-yap/pl-6.6.6/packages/jpl
+  - export CLASSPATH=$CLASSPATH:/home/travis/build/prolobjectlink/prolobjectlink-jpi-jpl-yap/pl-6.6.6/packages/jpl/jpl.jar
+  - cd ..
+  - cd ..
+  - cd ..
+
+install:
+  -
+
+matrix:
+   fast_finish: true
+   include:
+   -  jdk: oraclejdk8
+      env:
+      - DESC="Install Java 8"
+      - CMD="mvn clean install site"
+
+cache:
+  directories:
+  - ~/.m2
