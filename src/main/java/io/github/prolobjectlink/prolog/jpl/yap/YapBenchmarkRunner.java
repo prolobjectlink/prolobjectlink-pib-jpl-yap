@@ -1,6 +1,6 @@
 /*-
  * #%L
- * prolobjectlink-jpi-benchmark
+ * prolobjectlink-jpb-jpl-yap
  * %%
  * Copyright (C) 2012 - 2019 Prolobjectlink Project
  * %%
