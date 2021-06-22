@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<rss version="0.91">
+  <channel>
+    <title>prolobjectlink-jpb-jpl-yap - Checkstyle report</title>
+    <link>https://prolobjectlink.github.io/prolobjectlink-jpb-jpl-yap</link>
+    <description>prolobjectlink-jpb-jpl-yap - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2020 - 2021 Prolobjectlink Project</copyright>
+    <item>
+      <title>File: 1,
+             Errors: 1713,
+             Warnings: 0,
+             Infos: 0
+      </title>
+            <link>https://prolobjectlink.github.io/prolobjectlink-jpb-jpl-yap/checkstyle.html</link>
+      <description>
+        <p>Click <a href="https://prolobjectlink.github.io/prolobjectlink-jpb-jpl-yap/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpb-jpl-yap/checkstyle.html#io.github.prolobjectlink.prolog.jpl.yap.YapBenchmarkRunner.java">io/github/prolobjectlink/prolog/jpl/yap/YapBenchmarkRunner.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1713
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+
