@@ -447,7 +447,8 @@
 							javax.lang.model.type; javax.lang.model.util; javax.management;
 							javax.management.openmbean; javax.tools; sun.management;
 							sun.management.counter;
-							sun.misc;javax.swing; javax.swing.border; junit.framework; junit.textui;${project.groupId}.*;provide:=true</Import-Package>
+							sun.misc;javax.swing; javax.swing.border;
+							junit.framework; junit.textui;${project.groupId}.*;provide:=true</Import-Package>
 						<Bundle-SymbolicName>${project.groupId}.prolog.plugin;singleton:=true</Bundle-SymbolicName>
 						<Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
 						<Embed-Dependency>*;scope=compile|runtime;inline=false</Embed-Dependency>
@@ -465,6 +466,20 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<mavenHome>../apache-maven</mavenHome>
+					<goals>deploy -P release</goals>
+					<preparationGoals>clean install site</preparationGoals>
+					<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+					<tagNameFormat>v-@{project.version}</tagNameFormat>
+					<useReleaseProfile>false</useReleaseProfile>
+					<remoteTagging>false</remoteTagging>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
